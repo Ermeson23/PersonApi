@@ -1,0 +1,35 @@
+# Build
+bin/
+obj/
+Properties/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider project files
+.idea/
+
+# Dotnet environment files
+.env
+*.db
+
+# Logs
+*.log
+
+# Auto-generated swagger files
+swagger.json
+swagger/*.json
+
+# Publish output
+publish/
+out/
+
+# Temporary or backup files
+*.swp
+*.tmp
+
+# HTTP request metadata
+*.http
