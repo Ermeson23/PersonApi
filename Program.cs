@@ -1,9 +1,11 @@
+using PersonApi.Data;
 using PersonApi.Routes;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<PersonContext>();
 
 var app = builder.Build();
 
