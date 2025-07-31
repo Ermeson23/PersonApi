@@ -15,6 +15,7 @@ Properties/
 # Dotnet environment files
 .env
 *.db
+*.sqlite
 
 # Logs
 *.log
