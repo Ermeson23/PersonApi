@@ -35,7 +35,10 @@ public static class PersonRoute
 
         baseRoute.MapPut("{id:guid}", async (Guid id, PersonRequest req, PersonContext context) =>
         {
-            var person = await context.People.FirstOrDefaultAsync(x => x.Id == id);
+            if (string.IsNullOrWhiteSpace(req.Name))
+                return Results.BadRequest("O campo nome não pode ser vazio ou nulo.");
+
+            var person = await context.People.FirstOrDefaultAsync(p => p.Id == id);
 
             if (person == null)
                 return Results.NotFound();
