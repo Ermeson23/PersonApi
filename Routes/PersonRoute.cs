@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using PersonApi.Data;
 using PersonApi.Models;
 
 namespace PersonApi.Routes;
@@ -6,6 +8,17 @@ public static class PersonRoute
 {
     public static void PersonRoutes(this WebApplication app)
     {
-        app.MapGet("person", () => new PersonModel("Ermeson"));
+        var baseRoute = app.MapGroup("person");
+
+        baseRoute.MapGet("", async (PersonContext context) =>
+        {
+            var people = await context.People.ToListAsync();
+
+            if (people == null || people.Count == 0)
+                return Results.NotFound("Nenhuma pessoa encontrada.");
+
+            return Results.Ok(people);
+        });
+        
     }
 }
