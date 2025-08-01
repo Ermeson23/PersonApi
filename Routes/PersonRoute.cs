@@ -26,6 +26,18 @@ public static class PersonRoute
 
             return Results.Ok(people);
         });
-        
+
+        baseRoute.MapPut("{id:guid}", async (Guid id, PersonRequest req, PersonContext context) =>
+        {
+            var person = await context.People.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (person == null)
+                return Results.NotFound();
+
+            person.SetName(req.Name);
+            await context.SaveChangesAsync();
+            
+            return Results.Ok(person);
+        });
     }
 }
