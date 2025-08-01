@@ -12,9 +12,15 @@ public static class PersonRoute
 
         baseRoute.MapPost("", async (PersonRequest req, PersonContext context) =>
         {
+            if (string.IsNullOrWhiteSpace(req.Name))
+                return Results.BadRequest("O campo nome não pode ser vazio ou nulo.");
+
             var person = new PersonModel(req.Name);
+
             await context.AddAsync(person);
             await context.SaveChangesAsync();
+
+            return Results.Ok(person);
         });
 
         baseRoute.MapGet("", async (PersonContext context) =>
