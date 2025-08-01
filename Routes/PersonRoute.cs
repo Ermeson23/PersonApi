@@ -33,7 +33,7 @@ public static class PersonRoute
             return Results.Ok(people);
         });
 
-        baseRoute.MapPut("{id:guid}", async (Guid id, PersonRequest req, PersonContext context) =>
+        baseRoute.MapPut("/{id}", async (Guid id, PersonRequest req, PersonContext context) =>
         {
             if (string.IsNullOrWhiteSpace(req.Name))
                 return Results.BadRequest("O campo nome não pode ser vazio ou nulo.");
