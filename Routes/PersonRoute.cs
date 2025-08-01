@@ -10,6 +10,13 @@ public static class PersonRoute
     {
         var baseRoute = app.MapGroup("person");
 
+        baseRoute.MapPost("", async (PersonRequest req, PersonContext context) =>
+        {
+            var person = new PersonModel(req.Name);
+            await context.AddAsync(person);
+            await context.SaveChangesAsync();
+        });
+
         baseRoute.MapGet("", async (PersonContext context) =>
         {
             var people = await context.People.ToListAsync();
