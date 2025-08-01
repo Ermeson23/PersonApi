@@ -15,6 +15,16 @@ Construir uma API REST simples utilizando C# e .NET, com foco em persistência d
 | **Git**                                | Controle de versão do projeto                                     |
 | **Swagger**                            | Geração automática de documentação da API                         |
 
+## 📚 Endpoints da API
+| Método HTTP | Rota                    | Ação                                      |
+| ----------- | ----------------------- | ----------------------------------------- |
+| `POST`      | `/person`               | Cria uma nova pessoa                      |
+| `GET`       | `/person`               | Lista todas as pessoas ativas             |
+| `GET`       | `/person/{id}`          | Retorna uma pessoa ativa por ID           |
+| `PUT`       | `/person/{id}`          | Atualiza o nome de uma pessoa             |
+| `DELETE`    | `/person/{id}`          | Marca a pessoa como inativa (soft delete) |
+| `PATCH`     | `/person/{id}/activate` | Reativa uma pessoa inativa                |
+
 ## ⚙️ Configuração do Ambiente
 ### Pré-requisitos:
 - .NET 9 SDK
