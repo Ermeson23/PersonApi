@@ -33,6 +33,16 @@ public static class PersonRoute
             return Results.Ok(people);
         });
 
+        baseRoute.MapGet("/{id}", async (Guid id, PersonContext context) =>
+        {
+            var person = await context.People.FirstOrDefaultAsync(p => p.Id == id && p.Active);
+
+            if (person == null)
+                return Results.NotFound("Pessoa não encontrada ou está inativa.");
+
+            return Results.Ok(person);
+        });
+
         baseRoute.MapPut("/{id}", async (Guid id, PersonRequest req, PersonContext context) =>
         {
             if (string.IsNullOrWhiteSpace(req.Name))
