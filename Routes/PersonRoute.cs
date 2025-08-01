@@ -36,8 +36,21 @@ public static class PersonRoute
 
             person.SetName(req.Name);
             await context.SaveChangesAsync();
-            
+
             return Results.Ok(person);
+        });
+
+        baseRoute.MapDelete("/{id}", async (Guid id, PersonContext context) =>
+        {
+            var person = await context.People.FirstOrDefaultAsync(p => p.Id == id && p.Active);
+
+            if (person == null)
+                return Results.NotFound("Pessoa não encontrada ou já desativada.");
+
+            person.Deactivate();
+            await context.SaveChangesAsync();
+
+            return Results.NoContent();
         });
     }
 }
