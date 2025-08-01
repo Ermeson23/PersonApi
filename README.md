@@ -21,11 +21,6 @@ Construir uma API REST simples utilizando C# e .NET, com foco em persistência d
 - Git instalado
 - SQLite (Útil para a visualização direta do banco - opcional)
 
-### Instalação de dependências:
-- C#:
-    - Instalar o WebApi do C#:
-        ``` dotnet new webapi --name PersonApi -minimal ```
-
 ## 🚀 Como Executar
 
 - Navegue para um repositório de sua preferência:
