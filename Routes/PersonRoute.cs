@@ -52,5 +52,21 @@ public static class PersonRoute
 
             return Results.NoContent();
         });
+
+        baseRoute.MapPatch("/{id}/activate", async (Guid id, PersonContext context) =>
+        {
+            var person = await context.People.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (person == null)
+                return Results.NotFound("Pessoa não encontrada.");
+
+            if (person.Active)
+                return Results.BadRequest("Pessoa já está ativa.");
+
+            person.Activate();
+            await context.SaveChangesAsync();
+
+            return Results.Ok("Pessoa reativada com sucesso.");
+        });
     }
 }
