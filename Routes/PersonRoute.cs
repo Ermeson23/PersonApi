@@ -19,10 +19,10 @@ public static class PersonRoute
 
         baseRoute.MapGet("", async (PersonContext context) =>
         {
-            var people = await context.People.ToListAsync();
+            var people = await context.People.Where(p => p.Active).ToListAsync();
 
             if (people == null || people.Count == 0)
-                return Results.NotFound("Nenhuma pessoa encontrada.");
+                return Results.NotFound("Nenhuma pessoa ativa encontrada.");
 
             return Results.Ok(people);
         });
